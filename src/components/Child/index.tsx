@@ -1,26 +1,27 @@
 import { MouseEventHandler, useState } from "react";
 
 type Props = {
-  onNewValue: Function;
+  count : number,
+  onNewClick: Function;
 };
 
-export default function Child({ onNewValue}: Props) {
-  const [count, setCount] = useState(0);
+export default function Child({count, onNewClick}: Props) {
 
-  function handleAddClick() {
-    const newCount = count + 1;
-    setCount(newCount);
-    onNewValue(newCount);
+  function handleAddClick(){
+    const newValue = count + 1;
+    onNewClick(newValue);
   }
 
-  function setCountToZero() {
-    setCount(0);
+  function setCountToZero(){
+    count = 0;
+    onNewClick(count);
   }
-
+  
   return (
     <div className="child" style={{ border: "1px solid red", padding: "10px" }}>
       <p>{count}</p>
       <button onClick={handleAddClick}>ADD</button>
+      <button onClick={setCountToZero}>Limpar</button>
     </div>
   );
 }

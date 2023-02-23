@@ -1,13 +1,18 @@
 import { useState } from "react";
-import Child from "./components/Child";
 import Parent from "./components/Parent";
 
 export default function App() {
 
+  const [count, setCount] = useState<number>(0);
+
+  function handleNewCountValue(newCountValue : number) {
+    setCount(newCountValue);
+  }
+
   return (
     <main className="app">
-      <section className="parent-section">
-        <Parent />
+      <section className="container parent-section" style={{ border: "1px solid red", padding: "10px" , marginTop: "20px"}}>
+        <Parent count={count} onNewCountValue={handleNewCountValue} />
       </section>
     </main>
   )

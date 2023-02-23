@@ -1,19 +1,25 @@
-import { MouseEventHandler, useState } from "react";
 import Child from "../Child";
 
-export default function Parent() {
+type Props = {
+    count : number,
+    onNewCountValue : Function,
+}
 
-    const [triple, setTriple] = useState(0);
-
-    function handleNewValue(newValue : number) {
-        setTriple(newValue * 3);
+export default function Parent({count, onNewCountValue} : Props) {
+    
+    function handleNewClick(newValue : number) {
+        onNewCountValue(newValue);
+    }
+    
+    function setTripleValue(countNumber : number) : number{
+        return countNumber * 3;
     }
 
     return(
         <div className="container parent-container" style={{border: "1px solid red", padding: "10px"}}>
             <div className="parent">
-                <p>{triple}</p>
-                <Child onNewValue={handleNewValue} />
+                <p>{setTripleValue(count)}</p>
+                <Child count={count} onNewClick={handleNewClick}/>
             </div>
         </div>
     );
